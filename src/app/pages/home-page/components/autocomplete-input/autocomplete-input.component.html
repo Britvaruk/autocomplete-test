@@ -1,0 +1,28 @@
+<div class="input-block" #selectEl>
+  <span class="simple-text">Компания</span>
+  <input 
+    type="text"
+    placeholder="Введите название или сайт компании" 
+    [(ngModel)]="searchValue"
+    (ngModelChange)="search()"
+    (focus)="showTippy()"
+  >
+  <div #selectBodyEl class="dropdown-wrapper">
+    <ul class="data-list" *ngIf="searchValue">
+      <li *ngFor="let company of companyList">
+        <a class="list-item" (click)="selectItem(company)">
+          <div class="item-logo">
+            <img [src]="company.logo">
+          </div>        
+          <div class="item-info">
+            <span>{{company.name}}</span>
+            <span class="link-text">{{company.domain}}</span>
+          </div>
+        </a>              
+      </li>
+      <li *ngIf="!companyList.length">
+        <span>Не найдено</span>
+      </li>
+    </ul>
+  </div>
+</div>
